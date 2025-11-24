@@ -1,11 +1,9 @@
-const { Resend } = require("resend");
-
-// Initialize Resend
+const Resend = require("resend");
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ======================= SEND VERIFICATION EMAIL ========================= //
 const sendVerificationEmail = async (email, verificationToken, name) => {
-  const baseUrl = process.env.BASE_URL || "http://localhost:5000";
+  const baseUrl = process.env.BASE_URL || "http://localhost:10000";
   const verificationUrl = `${baseUrl}/verify-email?token=${verificationToken}`;
 
   const htmlContent = `
@@ -16,21 +14,15 @@ const sendVerificationEmail = async (email, verificationToken, name) => {
       <div style="padding: 30px; background: #f8fafc;">
         <h2 style="color: #4f46e5;">Hello ${name}!</h2>
         <p>Please verify your email address by clicking the button below:</p>
-
         <div style="text-align: center; margin: 30px 0;">
-          <a href="${verificationUrl}"
-             style="background: #4f46e5; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold;">
+          <a href="${verificationUrl}" style="background: #4f46e5; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: bold;">
             Verify Email Address
           </a>
         </div>
-
         <p>If the button doesn't work, copy this link:<br>
           <a href="${verificationUrl}" style="color: #4f46e5;">${verificationUrl}</a>
         </p>
-
-        <p style="color: #6b7280; font-size: 14px;">
-          This link expires in 24 hours.
-        </p>
+        <p style="color: #6b7280; font-size: 14px;">This link expires in 24 hours.</p>
       </div>
       <div style="background: #f1f5f9; padding: 20px; text-align: center; color: #6b7280; font-size: 12px;">
         <p>&copy; 2025 College Management System</p>
@@ -46,7 +38,7 @@ const sendVerificationEmail = async (email, verificationToken, name) => {
       html: htmlContent,
     });
 
-    console.log("Verification email sent:", result.id);
+    console.log("Verification email sent, id:", result.id);
     return { success: true, id: result.id };
   } catch (error) {
     console.error("Error sending verification email:", error);
@@ -56,7 +48,7 @@ const sendVerificationEmail = async (email, verificationToken, name) => {
 
 // ======================= SEND PASSWORD RESET EMAIL ========================= //
 const sendPasswordResetEmail = async (email, resetToken, name) => {
-  const baseUrl = process.env.BASE_URL || "http://localhost:5000";
+  const baseUrl = process.env.BASE_URL || "http://localhost:10000";
   const resetUrl = `${baseUrl}/reset-password?token=${resetToken}`;
 
   const htmlContent = `
@@ -67,21 +59,15 @@ const sendPasswordResetEmail = async (email, resetToken, name) => {
       <div style="padding: 30px; background: #f8fafc;">
         <h2 style="color: #4f46e5;">Hello ${name || ""}</h2>
         <p>Click the button below to reset your password:</p>
-
         <div style="text-align: center; margin: 30px 0;">
-          <a href="${resetUrl}"
-             style="background: #4f46e5; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold;">
+          <a href="${resetUrl}" style="background: #4f46e5; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: bold;">
             Reset Password
           </a>
         </div>
-
         <p>If the button doesn't work, copy this link:<br>
           <a href="${resetUrl}" style="color: #4f46e5;">${resetUrl}</a>
         </p>
-
-        <p style="color: #6b7280; font-size: 14px;">
-          This link expires in 1 hour.
-        </p>
+        <p style="color: #6b7280; font-size: 14px;">This link expires in 1 hour.</p>
       </div>
       <div style="background: #f1f5f9; padding: 20px; text-align: center; color: #6b7280; font-size: 12px;">
         <p>&copy; 2025 College Management System</p>
@@ -97,7 +83,7 @@ const sendPasswordResetEmail = async (email, resetToken, name) => {
       html: htmlContent,
     });
 
-    console.log("Password reset email sent:", result.id);
+    console.log("Password reset email sent, id:", result.id);
     return { success: true, id: result.id };
   } catch (error) {
     console.error("Error sending password reset email:", error);
