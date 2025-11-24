@@ -1,5 +1,6 @@
-const Resend = require("resend");
-const resend = new Resend(process.env.RESEND_API_KEY);
+const Resend = require("resend"); // import default
+const resend = new Resend({ apiKey: process.env.RESEND_API_KEY });
+
 
 // ======================= SEND VERIFICATION EMAIL ========================= //
 const sendVerificationEmail = async (email, verificationToken, name) => {
@@ -31,12 +32,12 @@ const sendVerificationEmail = async (email, verificationToken, name) => {
   `;
 
   try {
-    const result = await resend.emails.send({
-      from: "College App <onboarding@resend.dev>",
-      to: email,
-      subject: "Verify Your Email - College Management System",
-      html: htmlContent,
-    });
+   const result = await resend.emails.send({
+  from: "College App <onboarding@resend.dev>",
+  to: email,
+  subject: "Verify Your Email",
+  html: htmlContent,
+});
 
     console.log("Verification email sent, id:", result.id);
     return { success: true, id: result.id };
