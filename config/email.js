@@ -45,7 +45,7 @@ const sendVerificationEmail = async (email, verificationToken, name) => {
       html: htmlContent,
     });
 
-    console.log("Verification email sent, id:", result.id);
+    console.log("Verification email sent, id:", result);
     return { success: true, id: result.id };
   } catch (error) {
     console.error("Error sending verification email:", error);
@@ -90,7 +90,7 @@ const sendPasswordResetEmail = async (email, resetToken, name) => {
       html: htmlContent,
     });
 
-    console.log("Password reset email sent, id:", result.id);
+    console.log("Password reset email sent, id:", result);
     return { success: true, id: result.id };
   } catch (error) {
     console.error("Error sending password reset email:", error);
