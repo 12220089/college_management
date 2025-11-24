@@ -1,6 +1,5 @@
-const Resend = require("resend"); // import default
-const resend = new Resend({ apiKey: process.env.RESEND_API_KEY });
-
+const { Resend } = require("resend");
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ======================= SEND VERIFICATION EMAIL ========================= //
 const sendVerificationEmail = async (email, verificationToken, name) => {
