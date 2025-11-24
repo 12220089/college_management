@@ -51,7 +51,7 @@ const sendVerificationEmail = async (email, verificationToken, name) => {
   };
 
   try {
-    const result = await transporter.sendMail(mailOptions);
+    const result = await sendVerificationEmail(email, verificationToken);
     console.log('Verification email sent:', result.messageId);
     return { success: true, messageId: result.messageId };
   } catch (error) {
