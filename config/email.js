@@ -1,4 +1,7 @@
-const { Resend } = require("resend");
+require('dotenv').config(); // Make sure .env is loaded
+
+// ✅ Correct import for Resend SDK
+const Resend = require("resend").default;
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ======================= SEND VERIFICATION EMAIL ========================= //
@@ -31,12 +34,12 @@ const sendVerificationEmail = async (email, verificationToken, name) => {
   `;
 
   try {
-   const result = await resend.emails.send({
-  from: "College App <onboarding@resend.dev>",
-  to: email,
-  subject: "Verify Your Email",
-  html: htmlContent,
-});
+    const result = await resend.emails.send({
+      from: process.env.MAIL_FROM || "College App <onboarding@resend.dev>",
+      to: email,
+      subject: "Verify Your Email",
+      html: htmlContent,
+    });
 
     console.log("Verification email sent, id:", result.id);
     return { success: true, id: result.id };
@@ -77,7 +80,7 @@ const sendPasswordResetEmail = async (email, resetToken, name) => {
 
   try {
     const result = await resend.emails.send({
-      from: "College App <onboarding@resend.dev>",
+      from: process.env.MAIL_FROM || "College App <onboarding@resend.dev>",
       to: email,
       subject: "Reset Your Password - College Management System",
       html: htmlContent,
