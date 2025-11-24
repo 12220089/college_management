@@ -1,8 +1,12 @@
 require('dotenv').config(); // Make sure .env is loaded
 
 // ✅ Correct import for Resend SDK
-const Resend = require("resend").default;
+const { Resend } = require("resend");
+
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Then you can use resend.emails.send()
+
 
 // ======================= SEND VERIFICATION EMAIL ========================= //
 const sendVerificationEmail = async (email, verificationToken, name) => {
