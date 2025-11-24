@@ -39,7 +39,8 @@ const sendVerificationEmail = async (email, verificationToken, name) => {
 
   try {
     const result = await resend.emails.send({
-      from: process.env.MAIL_FROM || "College App <onboarding@updates.rub.edu.bt>",
+      from: process.env.MAIL_FROM || "College App <1220089.gcit@rub.edu.bt@resend.dev>",
+
       to: email,
       subject: "Verify Your Email",
       html: htmlContent,
